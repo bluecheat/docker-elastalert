@@ -1,0 +1,40 @@
+name: ${GLOBAL_TEXT} Gsym Node Error Alert
+
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+# type: frequency
+type: frequency
+
+# (Required, frequency specific)
+# Alert when this many documents matching the query occur within a timeframe
+num_events: 1
+
+use_strftime_index: true
+
+  # (Required, frequency specific)
+# num_events must occur within this amount of time to trigger an alert
+timeframe:
+  hours: 1
+
+
+# (Required)
+# Index to search, wildcard supported
+index: gsym-%Y.%m.%d*
+
+
+# (Required)
+# A list of Elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+filter:
+  - query_string:
+      query: "log_level: ERROR OR log_level: WARN"
+
+alert:
+  - "slack":
+      slack_webhook_url: "${SLACK_WEBWOOK_URL}"
+      slack_username_override: "${SLACK_USERNAME}"
+      slack_channel_override: "${SLACK_CHANNEL}"
+      slack_emoji_override: "${SLACK_EMOJI}"
+      slack_msg_color: "danger"

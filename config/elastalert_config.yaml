@@ -1,0 +1,29 @@
+rules_folder: ${RULES_DIR}
+
+run_every:
+  minutes: 1
+
+buffer_time:
+  minutes: 15
+
+es_host: ${ELASTICSEARCH_HOST}
+es_port: ${ELASTICSEARCH_PORT}
+
+#es_url_prefix: elasticsearch
+#use_ssl: True
+#verify_certs: True
+
+#es_username: someusername
+#es_password: somepassword
+
+#ca_certs: /path/to/cacert.pem
+#client_cert: /path/to/client_cert.pem
+#client_key: /path/to/client_key.key
+
+
+writeback_index: ${ELASTALERT_INDEX}
+writeback_alias: elastalert_alerts
+
+alert_time_limit:
+  days: 1
+
