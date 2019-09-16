@@ -22,9 +22,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python & \
 RUN mkdir -p ${CONFIG_DIR} && \
     mkdir -p ${RULES_DIR}
 COPY ./config ${CONFIG_DIR}
-COPY ./rules ${RULES_DIR}
 COPY ./run.sh ./requirements.txt ./requirements-dev.txt ${ELASTALERT_HOME}/
-
 WORKDIR ${ELASTALERT_HOME}
 
 ENV TZ UTC
@@ -34,8 +32,9 @@ RUN pip install elastalert==${ELASTALERT_VERSION}
 RUN rm -rf /var/cache/apt/*
 RUN chmod +x /opt/elastalert/run.sh
 
-VOLUME [ "${CONFIG_DIR}", "${RULES_DIR}", "${LOG_DIR}" ]
+#COPY ./rules ${RULES_DIR}
 
+VOLUME [ "${CONFIG_DIR}", "${RULES_DIR}", "${LOG_DIR}" ]
 # run elastalert
 CMD "${ELASTALERT_HOME}/run.sh"
 

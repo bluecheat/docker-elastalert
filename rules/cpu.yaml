@@ -1,9 +1,6 @@
 name: ${GLOBAL_TEXT} CPU load warning
 type: metric_aggregation
 
-#es_host: localhost
-#es_port: 9200
-
 index: metricbeat-*
 
 buffer_time:
@@ -12,7 +9,7 @@ buffer_time:
 metric_agg_key: system.cpu.user.pct
 metric_agg_type: avg
 query_key: beat.hostname
-#doc_type: metricsets
+doc_type: metricsets
 
 bucket_interval:
   minutes: 1
@@ -22,7 +19,6 @@ sync_bucket_interval: true
 #use_run_every_query_size: true
 
 max_threshold: 0.50
-
 
 # (Required)
 # The alert is use when a match is found
